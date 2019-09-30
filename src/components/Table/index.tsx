@@ -27,6 +27,7 @@ Table.Cell = generateTableElement('Head')
 
 export default Table
 
+//eslint-disable-next-line
 declare module Table {
   export let Head: TableElement
   export let Body: TableElement
