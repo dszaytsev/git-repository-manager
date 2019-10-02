@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Content: FC<Props> = ({ children, className }) => (
-  <div className={`Repository-content ${className}`}>
+  <div className={`Repository-Content ${className}`}>
     {children}
   </div>
 )

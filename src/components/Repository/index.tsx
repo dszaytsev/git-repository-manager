@@ -4,6 +4,8 @@ import Header from './Header'
 import Tabs from './Tabs'
 import Content from './Content'
 
+import './index.css'
+
 interface Props {
   className?: string
 }
