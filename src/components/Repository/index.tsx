@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
 
+import Layout from 'components/Layout'
+
 import Header from './Header'
 import Tabs from './Tabs'
 import Content from './Content'
@@ -12,15 +14,17 @@ interface Props {
 
 const Repository: FC<Props> = ({ children, className }) => {
   return (
-    <div className='Repository'>
-      <Header />
+    <Layout>
+      <div className='Repository'>
+        <Header />
 
-      <Tabs />
-      {/* <input className='Repository-search' data-component='Search' placeholder='Поиск' /> */}
-      <Content className={className}>
-        {children}
-      </Content>
-    </div>
+        <Tabs />
+        {/* <input className='Repository-search' data-component='Search' placeholder='Поиск' /> */}
+        <Content className={className}>
+          {children}
+        </Content>
+      </div>
+    </Layout>
   )
 }
 

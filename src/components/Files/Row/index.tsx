@@ -11,11 +11,11 @@ import Committer from '../Committer'
 import Time from '../Time'
 
 export default ({ branch, commit, committer, file, time }: Record) => (
-  <Table className='Files-Row'>
+  <Table.Row className='Files-Row'>
     <Table.Cell><File type={file.type} />{file.content}</Table.Cell>
     <Table.Cell><Branch href={branch.href}>{branch.content}</Branch></Table.Cell>
     <Table.Cell><Commit>{commit}</Commit></Table.Cell>
     <Table.Cell><Committer>{committer}</Committer></Table.Cell>
     <Table.Cell><Time>{time}</Time></Table.Cell>
-  </Table>
+  </Table.Row>
 )

@@ -6,6 +6,8 @@ import Repository from 'components/Repository'
 import Head from './Head'
 import Row from './Row'
 
+import './index.css'
+
 export interface Record {
   file: { type: string, content: string },
   branch: { href: string, content: string },
@@ -14,7 +16,7 @@ export interface Record {
   time: string
 }
 
-const RECORDS_MOCK: Record[] = [
+const RECORDS_STUB: Record[] = [
   { file: { type: 'folder', content: 'api' }, branch: { href: '#', content: 'd53dsv' }, commit: '[vcs] move http to arc', committer: 'noxomoo', time: '1 min ago' },
   { file: { type: 'folder', content: 'api2' }, branch: { href: '#', content: 'd53dsv' }, commit: '[vcs] move http to arc', committer: 'noxomoo', time: '1 min ago' },
   { file: { type: 'file', content: 'api3' }, branch: { href: '#', content: 'd53dsv' }, commit: '[vcs] move http to arc', committer: 'noxomoo', time: '1 min ago' },
@@ -24,10 +26,10 @@ const RECORDS_MOCK: Record[] = [
 const Files: FC = () => {
   return (
     <Repository className='Files'>
-      <Table className='RepositoryFiles'>
+      <Table className='Files-Table'>
         <Head />
 
-        <Table.Body>{RECORDS_MOCK.map(record => <Row key={record.file.content} {...record} />)}</Table.Body>
+        <Table.Body>{RECORDS_STUB.map(record => <Row key={record.file.content} {...record} />)}</Table.Body>
       </Table>
     </Repository>
   )

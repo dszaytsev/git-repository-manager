@@ -1,6 +1,7 @@
 {
   "extends": "react-app",
   "rules": {
-    "@typescript-eslint/no-namespace": "off"
+    "@typescript-eslint/no-namespace": "off",
+    "jsx-a11y/anchor-has-content": "off"
   }
 }

@@ -3,13 +3,13 @@ import React from 'react'
 import Table from 'components/Table';
 
 export default () => (
-  <Table.Head className='Files-Head'>
+  <Table.Head type='' className='Files-Head'>
     <Table.Row type='head'>
-      <Table.Cell>Name</Table.Cell>
-      <Table.Cell>Last Commit</Table.Cell>
-      <Table.Cell>Commit message</Table.Cell>
-      <Table.Cell>Committer</Table.Cell>
-      <Table.Cell>Updated</Table.Cell>
+      <Table.Cell type='head'>Name</Table.Cell>
+      <Table.Cell type='head'>Last Commit</Table.Cell>
+      <Table.Cell type='head'>Commit message</Table.Cell>
+      <Table.Cell type='head'>Committer</Table.Cell>
+      <Table.Cell type='head'>Updated</Table.Cell>
     </Table.Row>
   </Table.Head>
 )
