@@ -6,11 +6,12 @@
     "@babel/core": "7.6.0",
     "@svgr/webpack": "4.3.2",
     "@types/jest": "24.0.18",
-    "@types/node": "12.7.8",
+    "@types/node": "^12.7.8",
     "@types/react": "^16.9.4",
     "@types/react-dom": "16.9.1",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
+    "@zeit/next-css": "^1.0.1",
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
@@ -18,7 +19,7 @@
     "babel-preset-react-app": "^9.0.2",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "css-loader": "2.1.1",
+    "css-loader": "^1.0.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
     "eslint": "^6.1.0",
@@ -39,6 +40,7 @@
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.0",
     "mini-css-extract-plugin": "0.8.0",
+    "next": "^9.0.7",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.5.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -65,8 +67,9 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "dev": "next",
+    "start": "next start",
+    "build": "next build",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

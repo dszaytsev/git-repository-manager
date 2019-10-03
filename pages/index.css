@@ -1,0 +1,52 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#__next {
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  --grayColor100: #f0f2f3;
+  --grayColor200: #e5e5e5;
+  --grayColor400: #b8bec3;
+  --grayColor500: #7f8285;
+  --grayColor600: #4f4f4f;
+
+  --blueColor: #1774e9;
+
+  --redColor: #ff3029;
+
+  --lightSeparatorColor: var(--grayColor100);
+  --mediumSeparatorColor: var(--grayColor200);
+
+  --linkColor: var(--blueColor);
+
+  --primaryTextColor: #000;
+  --secondaryTextColor: var(--grayColor500);
+  --ghostTextColor: var(--grayColor400);
+  --inverseTextColor: #fff;
+
+  --activeTabColor: var(--redColor);
+
+  --backgroundColor: #fff;
+  --darkBackgroundColor: var(--grayColor600);
+
+  --boxShadowColor: rgba(53, 73, 93, 0.2);
+}
