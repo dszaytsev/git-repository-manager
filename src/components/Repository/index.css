@@ -6,7 +6,7 @@
 }
 
 .Repository-Title {
-  /* color: $primaryTextColor; */
+  color: var(--primaryTextColor);
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -23,7 +23,7 @@
 }
 
 .Repository-LastCommit {
-  /* color: $primaryTextColor; */
+  color: var(--primaryTextColor);
   font-size: 14px;
   line-height: 20px;
 }
@@ -31,7 +31,7 @@
 .Repository-Tabs {
   margin-top: 18px;
   margin-bottom: 16px;
-  /* border-bottom: 1px solid $mediumSeparatorColor; */
+  border-bottom: 1px solid var(--mediumSeparatorColor);
 }
 
 /* .Repository-search {
@@ -39,22 +39,22 @@
   width: 100%;
   margin-bottom: 16px;
   padding: 0 8px 8px;
-  color: $secondaryTextColor;
+  color: var(--secondaryTextColor);
   font-size: 14px;
   line-height: 20px;
   border: none;
-  border-bottom: 1px solid $mediumSeparatorColor;
+  border-bottom: 1px solid var(--mediumSeparatorColor);
 } */
 
 .Repository-Search::placeholder {
-  /* color: $grayColor400; */
+  color: var(--grayColor400);
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
 }
 
 .Repository-Search:focus {
-  /* border-bottom-color: $grayColor400; */
+  border-bottom-color: var(--grayColor400);
   outline: none;
 }
 
@@ -65,7 +65,7 @@
 .Repository-Content {
   margin-top: 24px;
 }
-/* 
+/*
 @include l-screen {
   .Repository {
     .Repository-title {

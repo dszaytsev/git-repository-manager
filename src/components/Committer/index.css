@@ -1,0 +1,7 @@
+.Committer {
+  display: inline-block;
+}
+
+.Committer:first-letter {
+  color: var(--redColor);
+}

@@ -3,7 +3,7 @@
   align-items: stretch;
   box-sizing: border-box;
   height: 56px;
-  /* border-bottom: 1px solid $lightSeparatorColor; */
+  border-bottom: 1px solid var(--lightSeparatorColor);
 }
 
 
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   margin-right: 40px;
-  color: $primaryTextColor;
+  color: var(--primaryTextColor);
   background-repeat: no-repeat;
 }
 

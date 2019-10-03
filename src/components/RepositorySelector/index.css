@@ -13,7 +13,7 @@
   left: 0;
   display: block;
   height: 3px;
-  /* background: $redColor; */
+  background: var(--redColor);
   content: '';
 }
 
@@ -58,7 +58,7 @@
   width: 42px;
   height: 4px;
   margin-left: -21px;
-  /* background-color: $grayColor200; */
+  background-color: var(--grayColor200);
   border-radius: 10px;
 }
 
@@ -67,29 +67,28 @@
   top: 100%;
   z-index: -1;
   margin-top: 1px;
-  /* box-shadow: 0 4px 16px $boxShadowColor; */
+  box-shadow: 0 4px 16px var(--boxShadowColor);
   visibility: hidden;
 }
 
-
-  /* // disabling box-shadow on top */
-  .RepositorySelector-Dropdown:after {
-    position: absolute;
-    top: -17px;
-    right: -16px;
-    left: -16px;
-    display: block;
-    height: 16px;
-    /* background-color: $backgroundColor; */
-    content: '';
-  }
+/* // disabling box-shadow on top */
+.RepositorySelector-Dropdown:after {
+  position: absolute;
+  top: -17px;
+  right: -16px;
+  left: -16px;
+  display: block;
+  height: 16px;
+  background-color: var(--backgroundColor);
+  content: '';
+}
 
 .RepositorySelector-Container {
   position: relative;
   box-sizing: border-box;
   min-width: 266px;
   padding: 14px 22px 18px;
-  /* background: $backgroundColor; */
+  background: var(--backgroundColor);
 }
 
 .RepositorySelector-Repo {
@@ -149,7 +148,7 @@
       box-sizing: border-box;
       min-width: 266px;
       padding: 36px 16px 18px;
-      background: $backgroundColor;
+      /* background: var(--backgroundColor; *)/
       background-color: #fff;
       border-radius: 10px 10px 0 0;
     }

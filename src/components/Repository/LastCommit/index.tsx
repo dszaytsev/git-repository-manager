@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 
-// *TODO: Link; Committer | Created at: 02.Oct.2019
+import Link from 'components/Link'
+import Committer from 'components/Committer'
 
 interface Props {
   hash: { href: string, content: string }
@@ -11,11 +12,11 @@ interface Props {
 const LastCommit: FC<Props> = ({ hash, time, committer }) => (
   <div className='Repository-LastCommit'>
     Last commit&nbsp;
-    <a className='Link' href={hash.href}>{hash.content}</a>
+    <Link href={hash.href}>{hash.content}</Link>
     &nbsp;on&nbsp;
-    <a className='Link' href={time.href}>{time.content}</a>
+    <Link href={time.href}>{time.content}</Link>
     &nbsp;by&nbsp;
-    <span className='Committer' >{committer.content}</span>
+    <Committer>{committer.content}</Committer>
   </div>
 )
 

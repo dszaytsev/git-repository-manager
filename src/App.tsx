@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-// import Files from 'pages/Files'
-import FileViewer from 'pages/FileViewer'
+import Files from 'pages/Files'
+// import FileViewer from 'pages/FileViewer'
 
 // const App: React.FC = () => {
 //   return (
@@ -27,7 +27,7 @@ import FileViewer from 'pages/FileViewer'
 // }
 
 const App: FC = () => (
-  <FileViewer />
+  <Files />
 )
 
 export default App;
