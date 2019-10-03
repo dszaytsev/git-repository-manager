@@ -1,10 +1,8 @@
-import React, { FC, PropsWithChildren } from 'react'
+import React, {  PropsWithChildren } from 'react'
 
 import './index.css'
 
 type Props = PropsWithChildren<{ className?: string, type?: string }>
-
-type TableElement = FC<Props>
 
 function Table({ className = '', children }: Props) {
   return (
@@ -28,11 +26,3 @@ Table.Row = generateTableElement('Row')
 Table.Cell = generateTableElement('Cell')
 
 export default Table
-
-//eslint-disable-next-line
-declare module Table {
-  export let Head: TableElement
-  export let Body: TableElement
-  export let Row: TableElement
-  export let Cell: TableElement
-}
