@@ -1,0 +1,39 @@
+.Tabs {
+  display: flex;
+  align-items: baseline;
+}
+
+.Tabs-Item {
+  position: relative;
+  padding-bottom: 10px;
+  color: var(--secondaryTextColor);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.Tabs-Item:before {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  display: block;
+  height: 3px;
+  background-color: var(--activeTabColor);
+  visibility: hidden;
+  content: '';
+}
+
+.Tabs-Item + .Tabs-Item {
+  margin-left: 32px;
+}
+
+.Tabs-Item_isActive {
+  color: var(--primaryTextColor);
+}
+
+.Tabs-Item_isActive:before {
+  visibility: visible;
+}
