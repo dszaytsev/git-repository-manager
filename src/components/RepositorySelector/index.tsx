@@ -16,11 +16,11 @@ const REPOS_STUB = [
   { href: '#', name: 'Devtools-team repository' },
 ]
 
-const Repository: FC = () => (
+const RepositorySelector: FC = () => (
   <div className='RepositorySelector'>
     <Title currentBranch='Arc' />
     <Dropdown repos={REPOS_STUB} />
   </div>
 )
 
-export default Repository
+export default RepositorySelector

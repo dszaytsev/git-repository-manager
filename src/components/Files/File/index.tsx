@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
 
+import FileIcon from 'components/FileIcon'
+
 const File: FC<{ type: string }> = ({ children, type }) => (
   <div className="Files-Icon">
-    <div className={`FileIcon FileIcon_${type}`}></div>
+    <FileIcon type={type} />
     {children}
   </div>
 )
