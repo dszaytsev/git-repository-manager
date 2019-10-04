@@ -10,7 +10,8 @@ interface Props {
 
 const Branches: FC<Props> = ({ branches = [] }) => (
   <div className='BranchSelector-Branches'>
-    {branches.map(branch => <Branch key={branch.name} {...branch} />)}
+    {/* todo change key to branch  */}
+    {branches.map((branch, index) => <Branch key={index} {...branch} />)}
   </div>
 )
 
