@@ -1,0 +1,27 @@
+{
+  "repos": {
+    "": {
+      "git": {
+        "path": "/Users/dima/Projects/git-repository-manager/.git"
+      },
+      "next": {
+        "path": "/Users/dima/Projects/git-repository-manager/.next"
+      }
+    },
+    "components": {
+      "path": "/Users/dima/Projects/git-repository-manager/components"
+    },
+    "node_modules": {
+      "path": "/Users/dima/Projects/git-repository-manager/node_modules"
+    },
+    "pages": {
+      "path": "/Users/dima/Projects/git-repository-manager/pages"
+    },
+    "server": {
+      "path": "/Users/dima/Projects/git-repository-manager/server"
+    },
+    "static": {
+      "path": "/Users/dima/Projects/git-repository-manager/static"
+    }
+  }
+}
