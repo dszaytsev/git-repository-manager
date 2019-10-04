@@ -14,17 +14,15 @@ interface Props {
 
 const Repository: FC<Props> = ({ children, className }) => {
   return (
-    <Layout>
-      <div className='Repository'>
-        <Header />
+    <div className='Repository'>
+      <Header />
 
-        <Tabs />
-        {/* <input className='Repository-search' data-component='Search' placeholder='Поиск' /> */}
-        <Content className={className}>
-          {children}
-        </Content>
-      </div>
-    </Layout>
+      <Tabs />
+      {/* <input className='Repository-search' data-component='Search' placeholder='Поиск' /> */}
+      <Content className={className}>
+        {children}
+      </Content>
+    </div>
   )
 }
 

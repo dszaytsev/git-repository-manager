@@ -26,7 +26,32 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
   // server.use(express.static(path.join(__dirname, 'public')))
 
   server.use('/', require('./server/routes'))
-  server.get('*', (req, res) => handle(req, res))
+  server.get('*', async (req, res, next) => {
+    return handle(req, res)
+    // try {
+    //   if (isInternalUrl(req.url)) {
+    //     return app.handleRequest(req, res, req.originalUrl)
+    //   }
+
+    //   req.locals = {}
+    //   req.locals.context = {}
+    //   const html = await app.renderToHTML(req, res, '/', {})
+
+    //   // Handle client redirects
+    //   const context = req.locals.context
+    //   if (context.url) return res.redirect(context.url)
+
+    //   // Handle client response statuses
+    //   if (context.status) return res.status(context.status).send()
+
+    //   // Request was ended by the user
+    //   if (html === null) return
+
+    //   app.sendHTML(req, res, html)
+    // } catch (e) {
+    //   next(e)
+    // }
+  })
 
 
   // server.use((_, res) => res.sendStatus(404))
@@ -47,10 +72,15 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
   })
 })
 
+// *TODO: move to utils | Created at: 05.Oct.2019
+const internalPrefixes = [/^\/_next\//, /^\/static\//]
 
-// initDb(pathToRepos)
-//   .then(() => {
-//     const server = app.listen(process.env.PORT || 3000, function () {
-//       console.log('Сервер запущен на портe: ' + server.address().port)
-//     })
-//   })
+function isInternalUrl(url) {
+  for (const prefix of internalPrefixes) {
+    if (prefix.test(url)) {
+      return true
+    }
+  }
+
+  return false
+}

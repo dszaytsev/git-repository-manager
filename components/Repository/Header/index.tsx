@@ -1,9 +1,13 @@
 import React, { FC } from 'react'
+
 import Branch from '../Branch'
 import LastCommit from '../LastCommit'
+import Navigation from '../Navigation'
 
 const Header: FC = () => (
   <div className='Repository-Header'>
+    <Navigation />
+
     <Branch name='arcadia' />
 
     <LastCommit

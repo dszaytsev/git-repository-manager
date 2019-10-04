@@ -8,6 +8,7 @@
   "rules": {
     "@typescript-eslint/no-namespace": "off",
     "jsx-a11y/anchor-has-content": "off",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "semi": ["warn", "never"]
   }
 }
