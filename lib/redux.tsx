@@ -1,13 +1,28 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Repo } from '../components/RepositorySelector'
-
+import { File } from '../components/Files'
+import thunk from 'redux-thunk'
 
 export enum ActionType {
-  GetRepositories
+  SetRepositories,
+  SetRepositoriesContent
+}
+
+export interface RepositoryContent {
+  files?: File
+}
+
+export interface Repository {
+  [key: string]: {
+    paths?: {
+      [key: string]: File[]
+    }
+  }
 }
 
 export interface State {
-  repositories: Repo[]
+  repositoryList: Repo[]
+  repositoriesContent: Repository
 }
 
 export interface Action {
@@ -15,9 +30,25 @@ export interface Action {
   [key: string]: any
 }
 
-const reducer = (state = {}, action: Action) => {
+const initialState: State = {
+  repositoryList: [],
+  repositoriesContent: {}
+}
+
+// // *TODO: write types for actions | Created at: 05.Oct.2019
+const reducer = (state = initialState, action: Action) => {
   const ACTIONS_MAP = {
-    [ActionType.GetRepositories]: { ...state, repositories: action.repositories }
+    [ActionType.SetRepositories]: { ...state, repositoryList: action.repositoryList },
+
+    [ActionType.SetRepositoriesContent]: { ...state,
+      repositoriesContent: { ...state.repositoriesContent,
+        [action.id]: {
+          paths: {
+            [action.path]: action.files
+          }
+        }
+      }
+    }
   }
 
   if (ACTIONS_MAP.hasOwnProperty(action.type)) return ACTIONS_MAP[action.type]
@@ -25,5 +56,5 @@ const reducer = (state = {}, action: Action) => {
 }
 
 export const makeStore = (initialState: any, _options: any) => {
-  return createStore(reducer, initialState)
+  return createStore(reducer, initialState, applyMiddleware(thunk))
 }

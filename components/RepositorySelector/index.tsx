@@ -13,7 +13,7 @@ export interface Repo {
 }
 
 const RepositorySelector: FC = () => {
-  const repositories = useSelector<State, Repo[]>(state => state.repositories)
+  const repositories = useSelector<State, Repo[]>(state => state.repositoryList)
 
   return (
     <div className='RepositorySelector'>

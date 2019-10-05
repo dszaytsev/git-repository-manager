@@ -10,6 +10,8 @@ const Content = dynamic(() => import('./Content'))
 const Header = dynamic(() => import('./Header'))
 
 const FileViewer: FC = () => {
+
+
   return (
     <Repository className='FileViewer'>
       <File className='FileViewer-File'>

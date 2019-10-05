@@ -1,9 +1,11 @@
 /* // зря я подвязался на ячейки :c */
 /* // *TODO: навешать классы элементов к нужным ячейкам | Created at: 21.Sep.2019 */
 .Files-Icon {
-  display: inline-block;
+  display: flex;
   margin-right: 8px;
   vertical-align: middle;
+  text-decoration: none;
+  color: var(--primaryTextColor);
 }
 
 .Files .Table-Cell:nth-child(1) {

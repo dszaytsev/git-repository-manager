@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 import dynamic from 'next/dynamic'
 import { NextPage, NextPageContext } from 'next'
 import { Store } from 'redux'
-import http from '../lib/http'
+import api from '../lib/api'
 import { State, ActionType } from '../lib/redux'
 
 const Index = () => {
@@ -19,8 +19,9 @@ const App: NextPage = () => {
   return (
     <div>
       <Switch>
-        <Route path='/:repositoryId/:path+' component={dynamic(() => import('../components/FileViewer'))} />
-        <Route path='/:repositoryId' component={dynamic(() => import('../components/Files'))} />
+        <Route path='/:repository/tree/:path+' component={dynamic(() => import('../components/Files'))} />
+        <Route path='/:repository/blob/:path+' component={dynamic(() => import('../components/FileViewer'))} />
+        <Route path='/:repository' component={dynamic(() => import('../components/Files'))} />
         <Route path='/' component={Index} />
         <Redirect to='/' />
       </Switch>
@@ -34,20 +35,17 @@ interface Context extends NextPageContext {
 
 App.getInitialProps = async ({ store }: Context) => {
   try {
-    const { data = [] } = await http.get<string[]>('/api/repos')
+    const { data = [] } = await api.get<string[]>('/')
 
-    const repositories = data.map(repo =>  ({
+    const repositoryList = data.map(repo => ({
       href: encodeURI(repo),
       name: repo
     }))
 
-    store.dispatch({ type: ActionType.GetRepositories, repositories })
+    store.dispatch({ type: ActionType.SetRepositories, repositoryList })
   } catch (e) { console.error(e) }
 
-  return {
-    state: store,
-    custom: 'custom'
-  }
+  return {}
 }
 
 export default App
