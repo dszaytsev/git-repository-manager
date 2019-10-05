@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
+import dynamic from 'next/dynamic'
 
 import Table from '../Table'
-import Repository from '../Repository'
-
-import Head from './Head'
-import Row from './Row'
-
 import './index.css'
+
+const Repository = dynamic(() => import('../Repository'))
+
+const Head = dynamic(() => import('./Head'))
+const Row = dynamic(() => import('./Row'))
 
 export interface Record {
   file: { type: string, content: string },

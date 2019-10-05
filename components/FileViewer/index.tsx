@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
-
-import File from '../File'
-import Repository from '../Repository'
-
-import Content from './Content'
-import Header from './Header'
+import dynamic from 'next/dynamic'
 
 import './index.css'
+
+const File = dynamic(() => import('../File'))
+const Repository = dynamic(() => import('../Repository'))
+
+const Content = dynamic(() => import('./Content'))
+const Header = dynamic(() => import('./Header'))
 
 const FileViewer: FC = () => {
   return (

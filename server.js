@@ -10,7 +10,6 @@ const pathToRepos = path.resolve(pathArg)
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-const handle = app.getRequestHandler()
 
 app.prepare().then(() => initDb(pathToRepos)).then(() => {
   const server = express()
@@ -27,30 +26,31 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
 
   server.use('/', require('./server/routes'))
   server.get('*', async (req, res, next) => {
-    return handle(req, res)
-    // try {
-    //   if (isInternalUrl(req.url)) {
-    //     return app.handleRequest(req, res, req.originalUrl)
-    //   }
 
-    //   req.locals = {}
-    //   req.locals.context = {}
-    //   const html = await app.renderToHTML(req, res, '/', {})
+    try {
+      // Handle assets
+      if (isInternalUrl(req.url)) {
+        return app.handleRequest(req, res, req.originalUrl)
+      }
 
-    //   // Handle client redirects
-    //   const context = req.locals.context
-    //   if (context.url) return res.redirect(context.url)
+      req.locals = {}
+      req.locals.context = {}
+      const html = await app.renderToHTML(req, res, '/', {})
 
-    //   // Handle client response statuses
-    //   if (context.status) return res.status(context.status).send()
+      // Handle client redirects
+      const context = req.locals.context
+      if (context.url) return res.redirect(context.url)
 
-    //   // Request was ended by the user
-    //   if (html === null) return
+      // Handle client response statuses
+      if (context.status) return res.status(context.status).send()
 
-    //   app.sendHTML(req, res, html)
-    // } catch (e) {
-    //   next(e)
-    // }
+      // Request was ended by the user
+      if (html === null) return
+
+      app.sendHTML(req, res, html)
+    } catch (e) {
+      next(e)
+    }
   })
 
 
@@ -72,10 +72,11 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
   })
 })
 
-// *TODO: move to utils | Created at: 05.Oct.2019
-const internalPrefixes = [/^\/_next\//, /^\/static\//]
 
+// *TODO: move to utils | Created at: 05.Oct.2019
 function isInternalUrl(url) {
+  const internalPrefixes = [/^\/_next\//, /^\/static\//]
+
   for (const prefix of internalPrefixes) {
     if (prefix.test(url)) {
       return true
