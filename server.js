@@ -11,6 +11,19 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 
+// *TODO: move to utils | Created at: 05.Oct.2019
+function isInternalUrl(url) {
+  const internalPrefixes = [/^\/_next\//, /^\/static\//]
+
+  for (const prefix of internalPrefixes) {
+    if (prefix.test(url)) {
+      return true
+    }
+  }
+
+  return false
+}
+
 app.prepare().then(() => initDb(pathToRepos)).then(() => {
   const server = express()
 
@@ -53,9 +66,8 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
     }
   })
 
-
-  // server.use((_, res) => res.sendStatus(404))
-
+  // Error handler
+  server.use((_, res) => res.sendStatus(404))
   server.use((err, _req, res, _next) => {
     const status = err.status || 500
 
@@ -71,17 +83,3 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
     console.log(`> Ready on http://localhost:${port}`)
   })
 })
-
-
-// *TODO: move to utils | Created at: 05.Oct.2019
-function isInternalUrl(url) {
-  const internalPrefixes = [/^\/_next\//, /^\/static\//]
-
-  for (const prefix of internalPrefixes) {
-    if (prefix.test(url)) {
-      return true
-    }
-  }
-
-  return false
-}
