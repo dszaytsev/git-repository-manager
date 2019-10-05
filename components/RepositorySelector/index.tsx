@@ -2,25 +2,25 @@ import React, { FC } from 'react'
 
 import Title from './Title'
 import Dropdown from './Dropdown'
+import { State } from '../../lib/redux'
 
 import './index.css'
+import { useSelector } from 'react-redux'
 
 export interface Repo {
   href: string
   name: string
 }
 
-const REPOS_STUB = [
-  { href: '#', name: 'Arc' },
-  { href: '#', name: 'My repository' },
-  { href: '#', name: 'Devtools-team repository' },
-]
+const RepositorySelector: FC = () => {
+  const repositories = useSelector<State, Repo[]>(state => state.repositories)
 
-const RepositorySelector: FC = () => (
-  <div className='RepositorySelector'>
-    <Title currentBranch='Arc' />
-    <Dropdown repos={REPOS_STUB} />
-  </div>
-)
+  return (
+    <div className='RepositorySelector'>
+      <Title currentBranch='Arc' />
+      <Dropdown repos={repositories} />
+    </div>
+  )
+}
 
 export default RepositorySelector

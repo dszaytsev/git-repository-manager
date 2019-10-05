@@ -1,22 +1,32 @@
 import App from 'next/app'
 import React from 'react'
+import { Store } from 'redux'
+import { Provider } from 'react-redux'
+import withRedux from 'next-redux-wrapper'
 
-import withReactRouter from '../next/with-react-router'
+import withReactRouter from '../lib/with-react-router'
+import { makeStore } from '../lib/redux'
 
 import Layout from '../components/Layout'
 
 import './index.css'
 
-class MyApp extends App {
+interface Props {
+  store: Store
+}
+
+class MyApp extends App<Props> {
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, store } = this.props
 
     return (
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
     )
   }
 }
 
-export default withReactRouter(MyApp)
+export default withReactRouter(withRedux(makeStore)(MyApp))
