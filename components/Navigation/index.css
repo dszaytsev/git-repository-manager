@@ -10,9 +10,11 @@
   color: var(--secondaryTextColor);
   font-size: 14px;
   line-height: 20px;
+  text-decoration: none;
 }
 
 .Navigation-Item:last-child {
+  pointer-events: none;
   color: var(--primaryTextColor);
   font-weight: 500;
 }

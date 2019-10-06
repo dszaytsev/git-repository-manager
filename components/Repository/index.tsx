@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-
-import Layout from '../Layout'
+import { withRouter, RouteComponentProps } from 'react-router'
 
 import Header from './Header'
 import Tabs from './Tabs'
@@ -8,14 +7,18 @@ import Content from './Content'
 
 import './index.css'
 
-interface Props {
+interface Params {
+  repository: string
+}
+
+interface Props extends RouteComponentProps<Params> {
   className?: string
 }
 
-const Repository: FC<Props> = ({ children, className }) => {
+const Repository: FC<Props> = ({ children, className, match: { params } }) => {
   return (
     <div className='Repository'>
-      <Header />
+      <Header repository={params.repository} />
 
       <Tabs />
       {/* <input className='Repository-search' data-component='Search' placeholder='Поиск' /> */}
@@ -26,4 +29,4 @@ const Repository: FC<Props> = ({ children, className }) => {
   )
 }
 
-export default Repository
+export default withRouter(Repository)

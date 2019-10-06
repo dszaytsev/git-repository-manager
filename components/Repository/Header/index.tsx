@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import Branch from '../Branch'
 import LastCommit from '../LastCommit'
 import Navigation from '../Navigation'
 
-const Header: FC = () => (
+const Header = ({ repository = '' }: { repository: string }) => (
   <div className='Repository-Header'>
     <Navigation />
 
-    <Branch name='arcadia' />
+    <Branch name={repository} />
 
     <LastCommit
       hash={{ content: 'c4d248', href: '/hash' }}

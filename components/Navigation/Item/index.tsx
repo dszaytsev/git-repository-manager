@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 
-const Item: FC = ({ children }) => (
-  <div className='Navigation-Item'>
+const Item: FC<{ path: string }> = ({ children, path }) => (
+  <Link to={path} className='Navigation-Item' >
     {children}
-  </div>
+  </Link>
 )
 
 export default Item
