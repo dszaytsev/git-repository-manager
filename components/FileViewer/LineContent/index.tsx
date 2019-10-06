@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
 
 const LineContent: FC = ({ children }) => (
-  <td className='FileViewer-LineContent'>
-    <pre>
-      {children}
-    </pre>
+  <td>
+    <div className='FileViewer-LineContent'>
+      <pre>
+        {children}
+      </pre>
+    </div>
   </td>
 )
 

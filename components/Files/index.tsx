@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { orderBy } from 'lodash'
 
 import api from '../../lib/api'
-import { State, ActionType, Repository as RepositoryType } from '../../lib/redux'
+import { State, ActionType } from '../../lib/redux'
 
 import Table from '../Table'
 

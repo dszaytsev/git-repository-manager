@@ -32,7 +32,7 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
     next()
   })
 
-  server.use(bodyParser.json())
+  // server.use(bodyParser.json())
   server.use(bodyParser.urlencoded({ extended: true }))
 
   // server.use(express.static(path.join(__dirname, 'public')))

@@ -4,7 +4,7 @@ const db = require('../services/db')
 const { error } = require('../utils')
 
 exports.show = async (req, res, next) => {
-  const { repositoryId, commitHash, pathToFile } = req.params
+  const { repositoryId, commitHash = '', pathToFile } = req.params
 
   const repo = db.repos.get(repositoryId).value()
 
@@ -13,8 +13,9 @@ exports.show = async (req, res, next) => {
   try {
     const file = await git.showFile(repo.path, commitHash, pathToFile)
 
-    res.type(mime.lookup(pathToFile))
-    res.send(file)
+    // res.type(mime.lookup(pathToFile))
+    res.setHeader('Content-Type', 'text/plain')
+    res.send(file.toString())
   } catch (err) {
     next(error(err, 422))
   }

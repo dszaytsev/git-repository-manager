@@ -7,7 +7,9 @@ interface Props {
 
 const Lines: FC<Props> = ({ file }) => (
   <table className='FileViewer-Lines'>
-    {file.map((line, index) => <Line key={index} line={line} />)}
+    <tbody>
+      {file.map((line, index) => <Line key={index} line={line} />)}
+    </tbody>
   </table>
 )
 

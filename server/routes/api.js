@@ -12,6 +12,7 @@ api.delete('/:repositoryId', reposController.delete)
 api.get('/:repositoryId/commits/:commitHash?', commitsController.getCommits)
 api.get('/:repositoryId/commits/:commitHash/diff', commitsController.diff)
 api.get('/:repositoryId/tree/:path([^/]*)?', contentController.repoContent) // *TODO: make (/tree...)? | Created at: 14.Sep.2019
-api.get('/:repositoryId/blob/:commitHash/:pathToFile([^/]*)', blobController.show)
+api.get('/:repositoryId/blob/:pathToFile([^/]*)', blobController.show)
+// api.get('/:repositoryId/blob/:commitHash/:pathToFile([^/]*)', blobController.show)
 
 module.exports = api
