@@ -1,0 +1,44 @@
+.Header {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  height: 56px;
+  border-bottom: 1px solid var(--lightSeparatorColor);
+}
+
+
+.Header-Container {
+  display: flex;
+  align-items: stretch;
+}
+
+.Header-Logo {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+  color: var(--primaryTextColor);
+  background-repeat: no-repeat;
+}
+
+.Header-Link {
+  display: block;
+  width: 118px;
+  height: 20px;
+  background-image: url('/static/images/logo.svg');
+  background-repeat: no-repeat;
+}
+
+.Header-Repo {
+  display: flex;
+  align-items: stretch;
+}
+/*
+@include s-screen {
+  .Header {
+    height: 60px;
+
+    .Header-Logo {
+      margin-right: 26px;
+    }
+  }
+} */

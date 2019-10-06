@@ -1,0 +1,32 @@
+.FileIcon {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.FileIcon:before {
+  display: block;
+  width: 12px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  content: '';
+}
+
+.FileIcon_folder:before {
+    background-image: url('/static/images/icon_folder.svg');
+  }
+
+.FileIcon_file:before {
+    background-image: url('/static/images/icon_file.svg');
+  }
+
+.FileIcon_markup:before {
+    background-image: url('/static/images/icon_markup.svg');
+  }
+
+.FileIcon_branch:before {
+    background-image: url('/static/images/icon_branch.svg');
+  }
+
