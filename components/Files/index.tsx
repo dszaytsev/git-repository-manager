@@ -81,7 +81,7 @@ const Files = ({ match: { url, params } }: RouteComponentProps<Params>) => {
     return files || []
   })
 
-  useEffect(() => { dispatch(fetchFiles(repository, url, !!path)) }, [repository])
+  useEffect(() => { dispatch(fetchFiles(repository, url, !!path)) }, [repository, path])
 
   const filesWithLinks = convertWithLinks(files, repository, path)
 
