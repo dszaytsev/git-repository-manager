@@ -1,0 +1,3 @@
+[submodule "__repos/task1"]
+	path = __repos/task1
+	url = git@github.com:UnicornShade/test-repo1.git
