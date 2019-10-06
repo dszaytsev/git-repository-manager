@@ -63,12 +63,14 @@
 }
 
 .RepositorySelector-Dropdown {
+  max-height: 500px;
   position: absolute;
   top: 100%;
   z-index: -1;
   margin-top: 1px;
   box-shadow: 0 4px 16px var(--boxShadowColor);
   visibility: hidden;
+  overflow: scroll;
 }
 
 /* // disabling box-shadow on top */
