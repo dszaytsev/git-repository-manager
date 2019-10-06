@@ -15,11 +15,7 @@ export interface Path {
   path: string
 }
 
-const buildUrl = (repository: string, path = '', isBlob = false) => {
-  if (isBlob) return `/${repository}/blob/${path}`
-
-  return `/${repository}/tree/${path}`
-}
+const buildUrl = (repository: string, path = '') => `/${repository}/tree/${path}`
 
 const getPaths = (pathParts: string[], paths: Path[] = []): Path[] => {
   if (pathParts.length === 0) return paths
@@ -32,22 +28,21 @@ const getPaths = (pathParts: string[], paths: Path[] = []): Path[] => {
   return getPaths(pathParts.slice(0, -1), paths.concat(path))
 }
 
-const Navigation = ({ match: { params, path: pathPattern } }: RouteComponentProps<Params>) => {
+const Navigation = ({ match: { params } }: RouteComponentProps<Params>) => {
   const { repository, path } = params
-
-  const isBlob = pathPattern.indexOf('blob') !== -1
   const paths: Path[] = []
-
 
   if (path) {
     const pathParts = path.split('/')
     getPaths(pathParts).forEach(path => paths.unshift(
-      { name: path.name, path: buildUrl(repository, path.path, isBlob) }
+      { name: path.name, path: buildUrl(repository, path.path) }
     ))
   }
 
   const rootPath = { path: buildUrl(repository), name: repository }
   paths.unshift(rootPath)
+
+  paths[paths.length - 1] = { ...paths[paths.length - 1], path: '' }
 
   return (
     <div className='Navigation'>
