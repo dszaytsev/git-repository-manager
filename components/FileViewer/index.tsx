@@ -27,10 +27,12 @@ const FileViewer = ({ match: { url } }: RouteComponentProps) => {
     fetchFile()
   }, [])
 
+  const title = url.slice(url.lastIndexOf('/') + 1, url.length)
+
   return (
     <Repository className='FileViewer'>
       <File className='FileViewer-File'>
-        <Header size='(4 347 bytes)' title='ya.make' />
+        <Header size='(4 347 bytes)' title={title} />
 
         <Content file={file} />
       </File>
