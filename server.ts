@@ -6,11 +6,18 @@ const bodyParser = require('body-parser')
 
 const clientRoutes = require('./routes')
 const initDb = require('./server/initializers/initDb')
+import express from 'express'
+import next from 'next'
+import path from 'path'
+import bodyParser from 'body-parser'
+
+import initDb from './server/initializers/initDb'
+import routes from './server/routes'
 
 const [pathArg = '.'] = process.argv.splice(2)
 const pathToRepos = path.resolve(pathArg)
 
-const port = parseInt(process.env.PORT, 10) || 3000
+const port = parseInt(process.env.PORT || '', 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = clientRoutes.getRequestHandler(app)
@@ -40,6 +47,7 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
 
   // Error handler
   server.use((_, res) => res.sendStatus(404))
+  //@ts-ignore
   server.use((err, _req, res, _next) => {
     const status = err.status || 500
 
