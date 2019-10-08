@@ -1,7 +1,10 @@
 const express = require('express')
 const next = require('next')
+const { parse } = require('url')
 const path = require('path')
 const bodyParser = require('body-parser')
+
+const clientRoutes = require('./routes')
 const initDb = require('./server/initializers/initDb')
 
 const [pathArg = '.'] = process.argv.splice(2)
@@ -10,19 +13,7 @@ const pathToRepos = path.resolve(pathArg)
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-
-// *TODO: move to utils | Created at: 05.Oct.2019
-function isInternalUrl(url) {
-  const internalPrefixes = [/^\/_next\//, /^\/static\//]
-
-  for (const prefix of internalPrefixes) {
-    if (prefix.test(url)) {
-      return true
-    }
-  }
-
-  return false
-}
+const handler = clientRoutes.getRequestHandler(app)
 
 app.prepare().then(() => initDb(pathToRepos)).then(() => {
   const server = express()
@@ -32,38 +23,19 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
     next()
   })
 
-  // server.use(bodyParser.json())
+  server.use(bodyParser.json())
   server.use(bodyParser.urlencoded({ extended: true }))
 
-  // server.use(express.static(path.join(__dirname, 'public')))
+  //ignore favicon
+  server.use((req, res, next) => {
+    req.originalUrl === '/favicon.ico'
+      ? res.status(204).json({ nope: true })
+      : next()
+  })
 
   server.use('/', require('./server/routes'))
-  server.get('*', async (req, res, next) => {
-
-    try {
-      // Handle assets
-      if (isInternalUrl(req.url)) {
-        return app.handleRequest(req, res, req.originalUrl)
-      }
-
-      req.locals = {}
-      req.locals.context = {}
-      const html = await app.renderToHTML(req, res, '/', {})
-
-      // Handle client redirects
-      const context = req.locals.context
-      if (context.url) return res.redirect(context.url)
-
-      // Handle client response statuses
-      if (context.status) return res.status(context.status).send()
-
-      // Request was ended by the user
-      if (html === null) return
-
-      app.sendHTML(req, res, html)
-    } catch (e) {
-      next(e)
-    }
+  server.get('*', async (req, res) => {
+    handler(req, res)
   })
 
   // Error handler

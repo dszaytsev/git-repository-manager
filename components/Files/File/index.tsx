@@ -1,15 +1,24 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
+//@ts-ignore
+import { Link } from '../../../routes'
 import FileIcon from '../../FileIcon'
 
 import { File as FileType } from '../'
 
-const File: FC<FileType> = ({ name, type, link = '/404' }) => {
+const File: FC<FileType> = ({ name, type }) => {
+  const { query } = useRouter()
+  const repository = query.repository as string
+
+  const route = type === 'folder' ? 'filesTree' : 'fileViewer'
+
   return (
-    <Link className='Files-Icon' to={link}>
-      <FileIcon type={type} />
-      {name}
+    <Link route={route} params={{ repository, path: name }}>
+      <a className='Files-Icon'>
+        <FileIcon type={type} />
+        {name}
+      </a>
     </Link>
   )
 }

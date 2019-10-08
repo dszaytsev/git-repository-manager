@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+//@ts-ignore
+import { Link } from '../../../routes'
 
-import { Repo as RepoType } from '../'
-
-const Repo: FC<RepoType> = ({ name, href }) => (
-  <Link className='RepositorySelector-Repo' to={`/${href}`}>
-    {name}
+const Repo: FC<{ name: string }> = ({ name }) => (
+  <Link route='files' params={{ repository: name }}>
+    <a className='RepositorySelector-Repo'>{name}</a>
   </Link>
 )
 

@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 const Item: FC<{ path: string }> = ({ children, path }) => (
-  <Link to={path} className='Navigation-Item' >
-    {children}
+  <Link href={path}>
+    <a className='Navigation-Item'>
+      {children}
+    </a>
   </Link>
 )
 

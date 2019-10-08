@@ -1,14 +1,9 @@
 import React from 'react'
-import { withRouter, RouteComponentProps } from 'react-router'
+import { useRouter } from 'next/router'
 
 import Item from './Item'
 
 import './index.css'
-
-interface Params {
-  repository: string
-  path: string
-}
 
 export interface Path {
   name: string
@@ -32,17 +27,21 @@ const getPaths = (pathParts: string[], paths: Path[] = []): Path[] => {
   return getPaths(pathParts.slice(0, -1), paths.concat(path))
 }
 
-const Navigation = ({ match: { params, path: pathPattern } }: RouteComponentProps<Params>) => {
-  const { repository, path } = params
+const Navigation = () => {
+  const { query, asPath } = useRouter()
+  const repository = query.repository as string
+  const path = query.path as string
 
-  const isBlob = pathPattern.indexOf('blob') !== -1
+  const isBlob = asPath.indexOf(`/blob/`) !== -1 // дописать условия, blob может быть папкой
   const paths: Path[] = []
-
 
   if (path) {
     const pathParts = path.split('/')
     getPaths(pathParts).forEach(path => paths.unshift(
-      { name: path.name, path: buildUrl(repository, path.path, isBlob) }
+      {
+        name: path.name,
+        path: buildUrl(repository, path.path, isBlob)
+      }
     ))
   }
 
@@ -56,4 +55,4 @@ const Navigation = ({ match: { params, path: pathPattern } }: RouteComponentProp
   )
 }
 
-export default withRouter(Navigation)
+export default Navigation
