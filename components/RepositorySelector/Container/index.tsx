@@ -1,19 +1,13 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import HideControl from '../HideControl'
 import Repos from '../Repos'
 
-import { Repo } from '../'
-
-interface Props {
-  repos?: Repo[]
-}
-
-const Container: FC<Props> = ({ repos }) => (
+const Container = () => (
   <div className='RepositorySelector-Container'>
     <HideControl />
 
-    <Repos repos={repos}/>
+    <Repos />
   </div>
 )
 

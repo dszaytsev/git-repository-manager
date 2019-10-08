@@ -5,19 +5,40 @@ import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 
 // import withReactRouter from '../lib/with-react-router'
-import { makeStore } from '../lib/redux'
+import { makeStore, State, ActionType } from '../lib/redux'
 
 import Layout from '../components/Layout'
 
-import './index.css'
+import './app.css'
+import api from '../lib/api'
+import { AppContextType } from 'next/dist/next-server/lib/utils'
 
 interface Props {
-  store: Store
+  store: Store<State>
 }
 
 class MyApp extends App<Props> {
+  static async getInitialProps({ Component, ctx }: AppContextType) {
+    let pageProps = {}
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+
+    try {
+      const { data: repositories = [] } = await api.get<string[]>('/')
+
+      return { pageProps: { ...pageProps, repositories } }
+    } catch (e) { console.error(e) }
+
+    return { pageProps: { ...pageProps, repositories: [] } }
+  }
+
   render() {
-    const { Component, pageProps, store } = this.props
+    const { Component, store, pageProps } = this.props
+    const { repositories = [] } = pageProps
+
+    store.dispatch({ type: ActionType.SetRepositories, repositories })
 
     return (
       <Provider store={store}>

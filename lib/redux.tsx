@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from 'redux'
-import { Repo } from '../components/RepositorySelector'
 import { File } from '../components/Files'
 import thunk from 'redux-thunk'
 
@@ -21,7 +20,7 @@ export interface Repository {
 }
 
 export interface State {
-  repositoryList: Repo[]
+  repositories: string[]
   repositoriesContent: Repository
 }
 
@@ -31,14 +30,14 @@ export interface Action {
 }
 
 const initialState: State = {
-  repositoryList: [],
+  repositories: [],
   repositoriesContent: {}
 }
 
 // // *TODO: write types for actions | Created at: 05.Oct.2019
 const reducer = (state = initialState, action: Action) => {
   const ACTIONS_MAP = {
-    [ActionType.SetRepositories]: { ...state, repositoryList: action.repositoryList },
+    [ActionType.SetRepositories]: { ...state, repositories: action.repositories },
 
     [ActionType.SetRepositoriesContent]: { ...state,
       repositoriesContent: { ...state.repositoriesContent,
