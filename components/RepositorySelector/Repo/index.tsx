@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { Repo as RepoType } from '../'
 
 const Repo: FC<RepoType> = ({ name, href }) => (
-  <Link className='RepositorySelector-Repo' to={`/${href}`}>
-    {name}
+  <Link href={`/${href}`}>
+    <a className='RepositorySelector-Repo'>{name}</a>
   </Link>
 )
 

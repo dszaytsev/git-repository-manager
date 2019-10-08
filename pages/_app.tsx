@@ -4,7 +4,7 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 
-import withReactRouter from '../lib/with-react-router'
+// import withReactRouter from '../lib/with-react-router'
 import { makeStore } from '../lib/redux'
 
 import Layout from '../components/Layout'
@@ -29,4 +29,4 @@ class MyApp extends App<Props> {
   }
 }
 
-export default withReactRouter(withRedux(makeStore)(MyApp))
+export default withRedux(makeStore)(MyApp)

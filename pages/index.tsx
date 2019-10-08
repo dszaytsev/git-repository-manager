@@ -1,32 +1,33 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { Redirect } from 'react-router'
-import dynamic from 'next/dynamic'
+// import { Route, Switch } from 'react-router-dom'
+// import { Redirect } from 'react-router'
+// import dynamic from 'next/dynamic'
 import { NextPage, NextPageContext } from 'next'
 import { Store } from 'redux'
 import api from '../lib/api'
 import { State, ActionType } from '../lib/redux'
 
-const Index = () => {
-  return (
-    <>
-      <h2>Select branch from dropdown above</h2>
-    </>
-  )
-}
+// const Index = () => {
+//   return (
+//     <>
+
+//     </>
+//   )
+// }
 
 const App: NextPage = () => {
-  return (
-    <div>
-      <Switch>
-        <Route path='/:repository/tree/:path+' component={dynamic(() => import('../components/Files'))} />
-        <Route path='/:repository/blob/:path+' component={dynamic(() => import('../components/FileViewer'))} />
-        <Route path='/:repository' component={dynamic(() => import('../components/Files'))} />
-        <Route path='/' component={Index} />
-        <Redirect to='/' />
-      </Switch>
-    </div>
-  )
+  return (<h2>Select branch from dropdown above</h2>)
+  //   <div>
+  //     <Index
+  //     <Switch>
+  //       <Route path='/:repository/tree/:path+' component={dynamic(() => import('../components/Files'))} />
+  //       <Route path='/:repository/blob/:path+' component={dynamic(() => import('../components/FileViewer'))} />
+  //       <Route path='/:repository' component={dynamic(() => import('../components/Files'))} />
+  //       <Route path='/' component={Index} />
+  //       <Redirect to='/' />
+  //     </Switch>
+  //   </div>
+  // )
 }
 
 interface Context extends NextPageContext {

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import Link from 'next/link'
 
-const Link: FC = () => <RouterLink className='Header-Link' to='/' />
+const LinkComponent: FC = () => <Link href='/'><a className='Header-Link' /></Link>
 
-export default Link
+export default LinkComponent
