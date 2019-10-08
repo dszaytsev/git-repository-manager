@@ -21,21 +21,28 @@ interface Context extends NextPageContext {
   query: Query
 }
 
-const Files: NextPage<Props> = ({ files, path, repository }) => {
-  return <FilesComponent files={files || []} path={path} repository={repository} />
+const buildUrl = (repository: string, path: string) => `/${repository}/tree${path ? `/${path}` : ''}`
+
+const Files: NextPage<Props> = ({ files }) => {
+  return <FilesComponent files={files || []} />
 }
 
 Files.getInitialProps = async ({ query }: Context): Promise<Props> => {
   try {
-  const { repository, path } = query
-  const url = `/${repository}/tree${path ? `/${path}` : ''}`
+    const { repository, path } = query
 
-  const { data } = await api.get<File[]>(url)
-  const files = orderBy(data, ['type', 'name'], ['desc', 'asc'])
+    const url = buildUrl(repository, path)
+    const { data } = await api.get<File[]>(url)
 
-  return { files, repository, path }
+    const files = orderBy(data, ['type', 'name'], ['desc', 'asc'])
+
+    return {
+      files,
+      repository,
+      path
+    }
   } catch {
-    return { files: [], repository: '', path: ''}
+    return { files: [], repository: '', path: '' }
   }
 }
 

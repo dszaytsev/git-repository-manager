@@ -6,11 +6,6 @@ import Item from './Item'
 
 import './index.css'
 
-interface Params {
-  repository: string
-  path: string
-}
-
 export interface Path {
   name: string
   path: string
@@ -33,7 +28,6 @@ const getPaths = (pathParts: string[], paths: Path[] = []): Path[] => {
   return getPaths(pathParts.slice(0, -1), paths.concat(path))
 }
 
-// const Navigation = ({ match: { params, path: pathPattern } }: RouteComponentProps<Params>) => {
 const Navigation = () => {
   const { query, asPath } = useRouter()
   const repository = query.repository as string

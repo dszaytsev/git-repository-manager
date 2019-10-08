@@ -1,27 +1,13 @@
 import { createStore, applyMiddleware } from 'redux'
-import { File } from '../components/Files'
+// import { File } from '../components/Files'
 import thunk from 'redux-thunk'
 
 export enum ActionType {
-  SetRepositories,
-  SetRepositoriesContent
-}
-
-export interface RepositoryContent {
-  files?: File
-}
-
-export interface Repository {
-  [key: string]: {
-    paths?: {
-      [key: string]: File[]
-    }
-  }
+  SetRepositories
 }
 
 export interface State {
   repositories: string[]
-  repositoriesContent: Repository
 }
 
 export interface Action {
@@ -30,24 +16,13 @@ export interface Action {
 }
 
 const initialState: State = {
-  repositories: [],
-  repositoriesContent: {}
+  repositories: []
 }
 
-// // *TODO: write types for actions | Created at: 05.Oct.2019
+// *TODO: write types for actions | Created at: 05.Oct.2019
 const reducer = (state = initialState, action: Action) => {
   const ACTIONS_MAP = {
     [ActionType.SetRepositories]: { ...state, repositories: action.repositories },
-
-    [ActionType.SetRepositoriesContent]: { ...state,
-      repositoriesContent: { ...state.repositoriesContent,
-        [action.id]: {
-          paths: {
-            [action.path]: action.files
-          }
-        }
-      }
-    }
   }
 
   if (ACTIONS_MAP.hasOwnProperty(action.type)) return ACTIONS_MAP[action.type]
