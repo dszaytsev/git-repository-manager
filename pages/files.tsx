@@ -36,11 +36,7 @@ Files.getInitialProps = async ({ query }: Context): Promise<Props> => {
 
     const files = orderBy(data, ['type', 'name'], ['desc', 'asc'])
 
-    return {
-      files,
-      repository,
-      path
-    }
+    return { files, repository, path }
   } catch {
     return { files: [], repository: '', path: '' }
   }

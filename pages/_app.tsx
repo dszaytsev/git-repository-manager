@@ -29,9 +29,10 @@ class MyApp extends App<Props> {
       const { data: repositories = [] } = await api.get<string[]>('/')
 
       return { pageProps: { ...pageProps, repositories } }
-    } catch (e) { console.error(e) }
-
-    return { pageProps: { ...pageProps, repositories: [] } }
+    } catch (e) {
+      console.error(e)
+      return { pageProps: { ...pageProps, repositories: [] } }
+    }
   }
 
   render() {

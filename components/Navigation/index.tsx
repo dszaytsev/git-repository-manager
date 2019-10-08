@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-// import { withRouter, RouteComponentProps } from 'react-router'
 
 import Item from './Item'
 
