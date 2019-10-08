@@ -1,5 +1,6 @@
 const express = require('express')
 const next = require('next')
+const { parse } = require('url')
 const path = require('path')
 const bodyParser = require('body-parser')
 
@@ -25,11 +26,15 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
   server.use(bodyParser.json())
   server.use(bodyParser.urlencoded({ extended: true }))
 
+  //ignore favicon
+  server.use((req, res, next) => {
+    req.originalUrl === '/favicon.ico'
+      ? res.status(204).json({ nope: true })
+      : next()
+  })
+
   server.use('/', require('./server/routes'))
   server.get('*', async (req, res) => {
-    // const parsedUrl = parse(req.url, true)
-    // const { pathname, query } = parsedUrl
-
     handler(req, res)
   })
 

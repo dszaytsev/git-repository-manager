@@ -69,11 +69,11 @@ const convertWithLinks = (files: File[], repository: string, path = '') => {
 interface Props {
   files: File[]
   repository: string
-  path: string
+  path?: string
 }
 
 // const Files = ({ match: { url, params } }: RouteComponentProps<Params>) => {
-const Files = ({ files, repository, path  }: Props) => {
+const Files = ({ files = [], repository, path = '' }: Props) => {
   // const { repository, path } = params
 
   // const dispatch = useDispatch()

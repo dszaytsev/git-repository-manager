@@ -1,44 +1,42 @@
 import React from 'react'
 import { NextPage, NextPageContext } from 'next'
 import { orderBy } from 'lodash'
+import { ParsedUrlQuery } from 'querystring'
 
-import FilesComponent from '../components/Files'
+import FilesComponent, { File } from '../components/Files'
 import api from '../lib/api'
 
-const Files: NextPage = () => {
-  return <FilesComponent files={[]} path='' repository='' />
+interface Props {
+  files: File[]
+  path?: string
+  repository: string
 }
 
-// interface RouteContext extends NextPageContext {
-//   query: string
-// }
+interface Query extends ParsedUrlQuery {
+  repository: string
+  path: string
+}
 
-Files.getInitialProps = async ({ query }: NextPageContext) => {
-  console.log(query.repository)
+interface Context extends NextPageContext {
+  query: Query
+}
+
+const Files: NextPage<Props> = ({ files, path, repository }) => {
+  return <FilesComponent files={files || []} path={path} repository={repository} />
+}
+
+Files.getInitialProps = async ({ query }: Context): Promise<Props> => {
+  try {
   const { repository, path } = query
-  // const reqUrl = hasPath ? url : `${repository}/tree`
-  const url = `/${repository}/tree/${path ? path : ''}`
+  const url = `/${repository}/tree${path ? `/${path}` : ''}`
 
-  console.log(url)
+  const { data } = await api.get<File[]>(url)
+  const files = orderBy(data, ['type', 'name'], ['desc', 'asc'])
 
-  // const { data = [] } = await api.get(url)
-  // const files = orderBy(data, ['type', 'name'], ['desc', 'asc'])
-  // api.get<File>(reqUrl)
-  //   .then(({ data = [] }) => {
-  //     const files = orderBy(data, ['type', 'name'], ['desc', 'asc'])
-
-  //     dispatch({
-  //       type: ActionType.SetRepositoriesContent,
-  //       id: repository,
-  //       path: `${repository}/${url}`,
-  //       files
-  //     })
-  //   })
-
-
-  // debugger
-
-  return { path: 'string' }
+  return { files, repository, path }
+  } catch {
+    return { files: [], repository: '', path: ''}
+  }
 }
 
 export default Files
