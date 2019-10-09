@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next",
     "start": "NODE_ENV=production node .next/production-server/server.js",
-    "build": "next build",
-    "buildWithServer": "next build && tsc --project tsconfig.server.json"
+    "build": "next build & tsc --project tsconfig.server.json"
   },
   "dependencies": {
     "@types/express": "^4.17.1",

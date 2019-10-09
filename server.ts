@@ -1,14 +1,13 @@
-const clientRoutes = require('./routes')
-const initDb = require('./server/initializers/initDb')
 import express from 'express'
 import next from 'next'
 import { parse } from 'url'
 import path from 'path'
 import bodyParser from 'body-parser'
 
-//@ts-ignore
+import clientRoutes from './routes'
+
+//js modules
 import initDb from './server/initializers/initDb'
-//@ts-ignore
 import routes from './server/routes'
 
 const [pathArg = '.'] = process.argv.splice(2)
@@ -37,7 +36,7 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
       : next()
   })
 
-  server.use('/', require('./server/routes'))
+  server.use('/', routes)
   server.get('*', async (req, res) => {
     handler(req, res)
   })
