@@ -29,6 +29,6 @@ const reducer = (state = initialState, action: Action) => {
   else return state
 }
 
-export const makeStore = (initialState: any, _options: any) => {
+export const makeStore = (initialState: State) => {
   return createStore(reducer, initialState, applyMiddleware(thunk))
 }
