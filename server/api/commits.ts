@@ -1,14 +1,20 @@
-const git = require('../services/git')
-const db = require('../services/db')
-const { error } = require('../utils')
+import { RequestHandler } from 'express'
 
-// *TODO: add DRY if there's time | Created at: 14.Sep.2019
-exports.getCommits = async (req, res, next) => {
+import { diff as gitDiff, getMainBranchHash, log } from '../services/git'
+
+//js files
+import db from '../services/db'
+import { error } from '../utils'
+
+export const getCommits: RequestHandler = async (req, res, next) => {
+  // paginator start
   const PER_PAGE = 20
   let { page = 1 } = req.query
   page = page < 1 ? 1 : page
   const range = [PER_PAGE * (page - 1), PER_PAGE * page]
+  // paginator end
 
+  // *TODO: add DRY Created at: 14.Sep.2019
   const { repositoryId, commitHash } = req.params
 
   const repo = db.repos.get(repositoryId).value()
@@ -16,11 +22,11 @@ exports.getCommits = async (req, res, next) => {
   if (!repo) next(error('Repo not found', 422))
 
   try {
-    const hash = commitHash || await git.getMainBranchHash(repo.path)
+    const hash = commitHash || await getMainBranchHash(repo.path)
 
     const commitsPath = `${repositoryId}.commits.${hash}`
     const commitsFromDb = db.repos.get(commitsPath).value()
-    const commits = commitsFromDb || await git.log(repo.path, hash)
+    const commits = commitsFromDb || await log(repo.path, hash)
 
     if (!commitsFromDb) db.repos.set(commitsPath, commits).write()
 
@@ -30,7 +36,7 @@ exports.getCommits = async (req, res, next) => {
   }
 }
 
-exports.diff = async (req, res, next) => {
+export const diff: RequestHandler = async (req, res, next) => {
   const { repositoryId, commitHash } = req.params
 
   const repo = db.repos.get(repositoryId).value()
@@ -38,9 +44,9 @@ exports.diff = async (req, res, next) => {
   if (!repo) next(error('Repo not found', 422))
 
   try {
-    const diff = await git.diff(repo.path, commitHash)
+    const result = await gitDiff(repo.path, commitHash)
 
-    res.json({ diff })
+    res.json({ diff: result })
   } catch (err) {
     next(error(err, 422))
   }
