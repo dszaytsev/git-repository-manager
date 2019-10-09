@@ -4,7 +4,6 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 
-// import withReactRouter from '../lib/with-react-router'
 import { makeStore, State, ActionType } from '../lib/redux'
 
 import Layout from '../components/Layout'

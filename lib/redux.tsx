@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from 'redux'
-// import { File } from '../components/Files'
 import thunk from 'redux-thunk'
 
 export enum ActionType {
