@@ -1,8 +1,12 @@
-const db = require('../services/db')
-const git = require('../services/git')
-const { error, dir: dirUtil } = require('../utils')
+import { RequestHandler } from 'express'
 
-exports.repoContent = async (req, res, next) => {
+import { getRevHash, tree, getMainBranchHash } from '../services/git'
+
+//js files
+import db from '../services/db'
+import { error, dir as dirUtil } from '../utils'
+
+export const repoContent: RequestHandler = async (req, res, next) => {
   const { repositoryId, commitHash = null, path } = req.params
 
   const repo = db.repos.get(repositoryId).value()
@@ -11,10 +15,10 @@ exports.repoContent = async (req, res, next) => {
 
   try {
     const hash = commitHash
-      ? await git.getRevHash(repo.path, commitHash)
-      : await git.getMainBranchHash(repo.path)
+      ? await getRevHash(repo.path, commitHash)
+      : await getMainBranchHash(repo.path)
 
-    const paths = await git.tree(repo.path, hash)
+    const paths = await tree(repo.path, hash)
 
     const hashFilesPath = `${repositoryId}.hashes.${hash}.files`
     const treeFromDb = db.repos.get(hashFilesPath).value()
