@@ -1,17 +1,14 @@
-const express = require('express')
-const next = require('next')
-const { parse } = require('url')
-const path = require('path')
-const bodyParser = require('body-parser')
-
 const clientRoutes = require('./routes')
 const initDb = require('./server/initializers/initDb')
 import express from 'express'
 import next from 'next'
+import { parse } from 'url'
 import path from 'path'
 import bodyParser from 'body-parser'
 
+//@ts-ignore
 import initDb from './server/initializers/initDb'
+//@ts-ignore
 import routes from './server/routes'
 
 const [pathArg = '.'] = process.argv.splice(2)
