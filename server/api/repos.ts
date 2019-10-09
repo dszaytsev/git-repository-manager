@@ -1,12 +1,15 @@
+import { RequestHandler } from 'express'
+
+import { clone } from '../services/git'
+
 const db = require('../services/db')
-const git = require('../services/git')
 const { dir, error } = require('../utils')
 
-exports.get = (req, res) => {
+export const get: RequestHandler = (req, res) => {
   res.json(Object.keys(db.repos.value()))
 }
 
-exports.delete = async (req, res, next) => {
+export const repoDelete: RequestHandler = async (req, res, next) => {
   const { repositoryId } = req.params
 
   const repo = db.repos.get(repositoryId).value()
@@ -22,11 +25,11 @@ exports.delete = async (req, res, next) => {
   }
 }
 
-exports.post = async (req, res, next) => {
+export const post: RequestHandler = async (req, res, next) => {
   const { url } = req.body
 
   try {
-    await git.clone(url, res.reposPath)
+    await clone(url, res.reposPath)
     res.json({ status: 'ok', message: 'Repo cloned' })
   } catch (err) {
     next(error(err, 500))
