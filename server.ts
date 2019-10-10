@@ -1,6 +1,5 @@
 import express from 'express'
 import next from 'next'
-import { parse } from 'url'
 import path from 'path'
 import bodyParser from 'body-parser'
 

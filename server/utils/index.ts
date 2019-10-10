@@ -1,5 +1,5 @@
 export { default as error } from './error'
 
-// import * as dir from './dir'
+import * as dir from './dir'
+export { dir }
 
-export { default as dir } from './dir'
