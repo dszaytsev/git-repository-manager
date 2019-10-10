@@ -2,9 +2,8 @@ import { RequestHandler } from 'express'
 
 import { diff as gitDiff, getMainBranchHash, log } from '../services/git'
 
-//js files
-import db from '../services/db'
 import { error } from '../utils'
+import { repos } from '../services/db'
 
 export const getCommits: RequestHandler = async (req, res, next) => {
   // paginator start
@@ -17,7 +16,7 @@ export const getCommits: RequestHandler = async (req, res, next) => {
   // *TODO: add DRY Created at: 14.Sep.2019
   const { repositoryId, commitHash } = req.params
 
-  const repo = db.repos.get(repositoryId).value()
+  const repo = repos.get(repositoryId).value()
 
   if (!repo) next(error('Repo not found', 422))
 
@@ -25,10 +24,10 @@ export const getCommits: RequestHandler = async (req, res, next) => {
     const hash = commitHash || await getMainBranchHash(repo.path)
 
     const commitsPath = `${repositoryId}.commits.${hash}`
-    const commitsFromDb = db.repos.get(commitsPath).value()
+    const commitsFromDb = repos.get(commitsPath).value()
     const commits = commitsFromDb || await log(repo.path, hash)
 
-    if (!commitsFromDb) db.repos.set(commitsPath, commits).write()
+    if (!commitsFromDb) repos.set(commitsPath, commits).write()
 
     res.json(commits.slice(...range))
   } catch (err) {
@@ -39,7 +38,7 @@ export const getCommits: RequestHandler = async (req, res, next) => {
 export const diff: RequestHandler = async (req, res, next) => {
   const { repositoryId, commitHash } = req.params
 
-  const repo = db.repos.get(repositoryId).value()
+  const repo = repos.get(repositoryId).value()
 
   if (!repo) next(error('Repo not found', 422))
 

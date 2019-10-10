@@ -3,7 +3,7 @@ import {  RequestHandler } from 'express'
 import { showFile } from '../services/git'
 
 //js files
-import db from '../services/db'
+import { repos } from '../services/db'
 import { error } from '../utils'
 // const mime = require('mime-types')
 
@@ -12,7 +12,7 @@ const MAX_FILE_SIZE = 100 // in KB
 export const show: RequestHandler = async (req, res, next) => {
   const { repositoryId, commitHash = '', pathToFile } = req.params
 
-  const repo = db.repos.get(repositoryId).value()
+  const repo = repos.get(repositoryId).value()
 
   if (!repo) next(error('Repo not found', 422))
 
