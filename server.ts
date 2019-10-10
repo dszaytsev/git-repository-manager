@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import next from 'next'
 import path from 'path'
 import bodyParser from 'body-parser'
@@ -8,6 +8,8 @@ import clientRoutes from './routes'
 //js modules
 import initDb from './server/initializers/initDb'
 import routes from './server/routes'
+import { ApplicationRequestHandler } from 'express-serve-static-core'
+import { HttpError } from './server/utils/error'
 
 const [pathArg = '.'] = process.argv.splice(2)
 const pathToRepos = path.resolve(pathArg)
@@ -42,9 +44,8 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
 
   // Error handler
   server.use((_, res) => res.sendStatus(404))
-  //@ts-ignore
-  server.use((err, _req, res, _next) => {
-    const status = err.status || 500
+  server.use((err: HttpError, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.code || 500
 
     res.status(status)
     res.json({

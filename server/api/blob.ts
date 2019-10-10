@@ -2,7 +2,6 @@ import {  RequestHandler } from 'express'
 
 import { showFile } from '../services/git'
 
-//js files
 import { repos } from '../services/db'
 import { error } from '../utils'
 // const mime = require('mime-types')

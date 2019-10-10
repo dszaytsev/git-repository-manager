@@ -6,12 +6,12 @@ import { error } from '../utils'
 import { repos } from '../services/db'
 
 export const getCommits: RequestHandler = async (req, res, next) => {
-  // paginator start
+  /* paginator start */
   const PER_PAGE = 20
   let { page = 1 } = req.query
   page = page < 1 ? 1 : page
   const range = [PER_PAGE * (page - 1), PER_PAGE * page]
-  // paginator end
+  /* paginator end */
 
   // *TODO: add DRY Created at: 14.Sep.2019
   const { repositoryId, commitHash } = req.params

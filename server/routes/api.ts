@@ -1,10 +1,10 @@
-const Router = require('express').Router
+import { Router } from 'express'
 const api = Router()
 
-const reposController = require('../api/repos')
-const commitsController = require('../api/commits')
-const contentController = require('../api/content')
-const blobController = require('../api/blob')
+import * as reposController from '../api/repos'
+import * as commitsController from '../api/commits'
+import * as contentController from '../api/content'
+import * as blobController from '../api/blob'
 
 api.get('/', reposController.get)
 api.post('/', reposController.post)
@@ -15,4 +15,4 @@ api.get('/:repositoryId/tree/:path([^/]*)?', contentController.repoContent) // *
 api.get('/:repositoryId/blob/:pathToFile([^/]*)', blobController.show)
 // api.get('/:repositoryId/blob/:commitHash/:pathToFile([^/]*)', blobController.show)
 
-module.exports = api
+export default api
