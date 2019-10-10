@@ -2,9 +2,10 @@ import { RequestHandler } from 'express'
 
 import { getRevHash, tree, getMainBranchHash } from '../services/git'
 
+import { error, dir as dirUtil } from '../utils'
+
 //js files
 import db from '../services/db'
-import { error, dir as dirUtil } from '../utils'
 
 export const repoContent: RequestHandler = async (req, res, next) => {
   const { repositoryId, commitHash = null, path } = req.params

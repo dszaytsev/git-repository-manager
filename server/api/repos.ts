@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express'
 
 import { clone } from '../services/git'
+import { dir, error } from '../utils'
 
 const db = require('../services/db')
-const { dir, error } = require('../utils')
 
 export const get: RequestHandler = (req, res) => {
   res.json(Object.keys(db.repos.value()))
