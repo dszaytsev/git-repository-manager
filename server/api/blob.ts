@@ -1,21 +1,24 @@
+import {  RequestHandler } from 'express'
+
+import { showFile } from '../services/git'
+
+import { repos } from '../services/db'
+import { error } from '../utils'
 // const mime = require('mime-types')
-const git = require('../services/git')
-const db = require('../services/db')
-const { error } = require('../utils')
 
 const MAX_FILE_SIZE = 100 // in KB
 
-exports.show = async (req, res, next) => {
+export const show: RequestHandler = async (req, res, next) => {
   const { repositoryId, commitHash = '', pathToFile } = req.params
 
-  const repo = db.repos.get(repositoryId).value()
+  const repo = repos.get(repositoryId).value()
 
   if (!repo) next(error('Repo not found', 422))
 
   try {
     res.setHeader('Content-Type', 'text/plain')
 
-    const file = await git.showFile(repo.path, commitHash, pathToFile)
+    const file = await showFile(repo.path, commitHash, pathToFile)
 
     // res.type(mime.lookup(pathToFile))
     if (file.byteLength > 1024 * MAX_FILE_SIZE) res.send('Too large file to display')

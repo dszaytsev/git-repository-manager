@@ -1,9 +1,11 @@
-const nextRoutes = require('next-routes')
+import Router from 'next-routes'
 
-const routes = nextRoutes()
+const routes = new Router()
 
 routes.add('filesTree', '/:repository/tree/:path*', 'files')
 routes.add('fileViewer', '/:repository/blob/:path*', 'fileViewer')
 routes.add('files', '/:repository', 'files')
 
-module.exports = routes
+export const Link = routes.Link
+
+export default routes

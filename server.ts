@@ -1,16 +1,20 @@
-const express = require('express')
-const next = require('next')
-const { parse } = require('url')
-const path = require('path')
-const bodyParser = require('body-parser')
+import express, { Request, Response, NextFunction } from 'express'
+import next from 'next'
+import path from 'path'
+import bodyParser from 'body-parser'
 
-const clientRoutes = require('./routes')
-const initDb = require('./server/initializers/initDb')
+import clientRoutes from './routes'
+
+//js modules
+import initDb from './server/initializers/initDb'
+import routes from './server/routes'
+import { ApplicationRequestHandler } from 'express-serve-static-core'
+import { HttpError } from './server/utils/error'
 
 const [pathArg = '.'] = process.argv.splice(2)
 const pathToRepos = path.resolve(pathArg)
 
-const port = parseInt(process.env.PORT, 10) || 3000
+const port = parseInt(process.env.PORT || '', 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = clientRoutes.getRequestHandler(app)
@@ -33,15 +37,15 @@ app.prepare().then(() => initDb(pathToRepos)).then(() => {
       : next()
   })
 
-  server.use('/', require('./server/routes'))
+  server.use('/', routes)
   server.get('*', async (req, res) => {
     handler(req, res)
   })
 
   // Error handler
   server.use((_, res) => res.sendStatus(404))
-  server.use((err, _req, res, _next) => {
-    const status = err.status || 500
+  server.use((err: HttpError, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.code || 500
 
     res.status(status)
     res.json({
