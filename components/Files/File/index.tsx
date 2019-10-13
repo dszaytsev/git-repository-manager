@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
 
-//@ts-ignore
 import { Link } from '../../../routes'
 import FileIcon from '../../FileIcon'
 

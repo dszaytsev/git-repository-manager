@@ -1,3 +1,5 @@
 import React from 'react'
 
-export default () => (<div className='FileViewer-Download' />)
+const Download = () => (<div className='FileViewer-Download' />)
+
+export default Download

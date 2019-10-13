@@ -1,3 +1,5 @@
 import React from 'react'
 
-export default () => <td className='FileViewer-LineNumber' />
+const LineNumber = () => <td className='FileViewer-LineNumber' />
+
+export default LineNumber

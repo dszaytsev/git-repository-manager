@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Table from '../../Table';
+import Table from '../../Table'
 
-export default () => (
+const FilesHead = () => (
   <Table.Head type='' className='Files-Head'>
     <Table.Row type='head'>
       <Table.Cell type='head'>Name</Table.Cell>
@@ -13,3 +13,5 @@ export default () => (
     </Table.Row>
   </Table.Head>
 )
+
+export default FilesHead

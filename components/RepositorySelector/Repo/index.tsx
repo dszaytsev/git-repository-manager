@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-//@ts-ignore
+
 import { Link } from '../../../routes'
 
 const Repo: FC<{ name: string }> = ({ name }) => (

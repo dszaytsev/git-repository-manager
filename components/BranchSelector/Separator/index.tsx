@@ -1,3 +1,5 @@
 import React from 'react'
 
-export default () => <div className='BranchSelector-Separator'/>
+const Separator = () => <div className='BranchSelector-Separator'/>
+
+export default Separator
